@@ -2,50 +2,71 @@ import { Github, Linkedin, Mail, ExternalLink, Download } from "lucide-react"
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100 font-sans">
+      {" "}
+      {/* Changed background, font */}
       {/* Hero Section */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <header className="bg-white shadow-md py-10">
+        {" "}
+        {/* Added shadow and padding */}
+        <div className="max-w-4xl mx-auto px-6">
+          {" "}
+          {/* Increased padding */}
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+            <h1 className="text-5xl font-bold text-gray-900 sm:text-6xl mb-2">
+              {" "}
+              {/* Increased font size, added margin */}
               Dhaval Chaudhari
             </h1>
-            <p className="mt-4 text-xl text-gray-600">Software Engineer</p>
-            <div className="mt-6 flex justify-center space-x-6">
+            <p className="mt-2 text-xl text-gray-700 font-light">
+              Software Engineer
+            </p>{" "}
+            {/* Slightly darker text, lighter font */}
+            <div className="mt-8 flex justify-center space-x-8">
+              {" "}
+              {/* Increased spacing */}
               <a
                 href="https://github.com/dhvll"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-600 hover:text-blue-600 transition duration-200"
               >
-                <Github className="w-6 h-6" />
+                <Github className="w-7 h-7" /> {/* Slightly larger icons */}
               </a>
               <a
                 href="https://www.linkedin.com/in/dhavalchaudhari"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-600 hover:text-blue-600 transition duration-200"
               >
-                <Linkedin className="w-6 h-6" />
+                <Linkedin className="w-7 h-7" />
               </a>
               <a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=dhavalchaudhari13@outlook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-600 hover:text-blue-600 transition duration-200"
               >
-                <Mail className="w-6 h-6" />
+                <Mail className="w-7 h-7" />
               </a>
             </div>
           </div>
         </div>
       </header>
-
-      <main className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <main className="max-w-4xl mx-auto px-6 py-16">
+        {" "}
+        {/* Increased padding and py */}
         {/* About Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">About Me</h2>
-          <p className="text-gray-600">
+        <section className="mb-16">
+          {" "}
+          {/* Increased margin */}
+          <h2 className="text-3xl font-semibold text-gray-900 mb-6 border-b-2 pb-2 border-gray-200">
+            About Me
+          </h2>{" "}
+          {/* Styled heading */}
+          <p className="text-gray-700 leading-relaxed">
+            {" "}
+            {/* Improved readability */}
             As a passionate computer engineer with over a year of hands-on
             experience, I have developed a strong interest in full-stack web
             development and am skilled in a wide array of programming languages
@@ -58,16 +79,28 @@ function App() {
             development practices.
           </p>
         </section>
-
         {/* Projects Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Projects</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900">
+        <section className="mb-16">
+          {" "}
+          {/* Increased margin */}
+          <h2 className="text-3xl font-semibold text-gray-900 mb-6 border-b-2 pb-2 border-gray-200">
+            Projects
+          </h2>{" "}
+          {/* Styled heading */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {" "}
+            {/* Increased gap */}
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+              {" "}
+              {/* Enhanced card styling */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                {" "}
+                {/* Increased font size, margin */}
                 SnippetShare - Code Snippet Manager
               </h3>
-              <p className="mt-2 text-gray-600">
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {" "}
+                {/* Improved readability, margin */}
                 This web application provides a secure and efficient platform
                 for managing, storing, and sharing code snippets. Built with
                 Golang, it features user authentication, session management, and
@@ -77,33 +110,47 @@ function App() {
                 href="https://github.com/dhvll/snippetshare"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
-                View Project <ExternalLink className="ml-2 w-4 h-4" />
+                View Project <ExternalLink className="ml-2 w-5 h-5" />{" "}
+                {/* Slightly larger icon */}
               </a>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900">
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+              {" "}
+              {/* Enhanced card styling */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                {" "}
+                {/* Increased font size, margin */}
                 Agile Project Management Software
               </h3>
-              <p className="mt-2 text-gray-600">
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {" "}
+                {/* Improved readability, margin */}
                 Fehler is a project management software which let teams plan,
-                track and manage software developement projects.
+                track and manage software development projects.
               </p>
               <a
                 href="https://github.com/dhvll/fehler_core"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
-                View Project <ExternalLink className="ml-2 w-4 h-4" />
+                View Project <ExternalLink className="ml-2 w-5 h-5" />{" "}
+                {/* Slightly larger icon */}
               </a>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900">
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+              {" "}
+              {/* Enhanced card styling */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                {" "}
+                {/* Increased font size, margin */}
                 Customer Relationship Management System
               </h3>
-              <p className="mt-2 text-gray-600">
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {" "}
+                {/* Improved readability, margin */}
                 This is Customer relationship management system which helps
                 users to manage relationships and interactions with the customer
                 and assign them to agents efficiently
@@ -112,58 +159,24 @@ function App() {
                 href="https://github.com/dhvll/CRM-System"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
-                View Project <ExternalLink className="ml-2 w-4 h-4" />
+                View Project <ExternalLink className="ml-2 w-5 h-5" />{" "}
+                {/* Slightly larger icon */}
               </a>
             </div>
           </div>
         </section>
-
-        {/* Experience Section */}
-        {/* <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Experience</h2>
-          <div className="space-y-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Software Engineer
-                  </h3>
-                  <p className="text-gray-600">Company A</p>
-                </div>
-                <span className="text-sm text-gray-500">2022 - Present</span>
-              </div>
-              <ul className="mt-4 text-gray-600 list-disc list-inside space-y-2">
-                <li>Led development of microservices architecture</li>
-                <li>Implemented CI/CD pipelines</li>
-                <li>Improved system performance by 40%</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Junior Developer
-                  </h3>
-                  <p className="text-gray-600">Company B</p>
-                </div>
-                <span className="text-sm text-gray-500">2020 - 2022</span>
-              </div>
-              <ul className="mt-4 text-gray-600 list-disc list-inside space-y-2">
-                <li>Developed full-stack web applications</li>
-                <li>Collaborated with cross-functional teams</li>
-                <li>Optimized database performance</li>
-              </ul>
-            </div>
-          </div>
-        </section> */}
-
-        {/* Skills Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Skills</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <section className="mb-16">
+          {" "}
+          {/* Increased margin */}
+          <h2 className="text-3xl font-semibold text-gray-900 mb-6 border-b-2 pb-2 border-gray-200">
+            Skills
+          </h2>{" "}
+          {/* Styled heading */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {" "}
+            {/* Increased gap */}
             {[
               "Python",
               "TypeScript",
@@ -177,41 +190,54 @@ function App() {
             ].map((skill) => (
               <div
                 key={skill}
-                className="bg-white px-4 py-2 rounded-lg shadow-sm text-center"
+                className="bg-blue-50 px-5 py-3 rounded-full shadow-sm text-center hover:bg-blue-100 transition duration-200"
               >
-                <span className="text-gray-800">{skill}</span>
+                <span className="text-gray-800 font-medium">{skill}</span>{" "}
+                {/* Bold skill text */}
               </div>
             ))}
           </div>
         </section>
-
         {/* Education Section */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Education</h2>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-6 border-b-2 pb-2 border-gray-200">
+            Education
+          </h2>{" "}
+          {/* Styled heading */}
+          <div className="bg-white p-8 rounded-xl shadow-lg">
+            {" "}
+            {/* Enhanced card styling */}
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Bachelor of Engineering, Computer Engineering{" "}
+                <h3 className="text-xl font-semibold text-gray-900">
+                  {" "}
+                  {/* Increased font size */}
+                  Bachelor of Engineering, Computer Engineering
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-700 mt-1">
+                  {" "}
+                  {/* Added margin */}
                   Mahatma Gandhi Mission’s College of Engineering and
                   Technology.
                 </p>
               </div>
-              <span className="text-sm text-gray-500">2018 - 2022</span>
+              <span className="text-sm text-gray-500 font-light">
+                2018 - 2022
+              </span>{" "}
+              {/* Lighter font */}
             </div>
           </div>
         </section>
       </main>
-
       {/* Footer */}
-      <footer className="bg-white mt-12">
-        <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <footer className="bg-white mt-12 py-8 border-t border-gray-200">
+        {" "}
+        {/* Changed mt-20 to mt-12 */}
+        <div className="max-w-4xl mx-auto px-6">
           <div className="flex justify-between items-center">
-            <p className="text-gray-500">© 2025 Dhaval Chaudhari.</p>
+            <p className="text-gray-600 font-light">© 2025 Dhaval Chaudhari.</p>
             <button
-              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="inline-flex items-center px-5 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-200"
               onClick={() => {
                 const link = document.createElement("a")
                 link.href = "/resume.pdf" // Ensure the file is inside the public folder
