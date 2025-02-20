@@ -15,12 +15,16 @@ function App() {
             <div className="mt-6 flex justify-center space-x-6">
               <a
                 href="https://github.com/dhvll"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-700"
               >
                 <Github className="w-6 h-6" />
               </a>
               <a
                 href="https://www.linkedin.com/in/dhavalchaudhari"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-700"
               >
                 <Linkedin className="w-6 h-6" />
@@ -59,7 +63,7 @@ function App() {
         {/* Projects Section */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900">
                 SnippetShare - Code Snippet Manager
@@ -72,6 +76,8 @@ function App() {
               </p>
               <a
                 href="https://github.com/dhvll/snippetshare"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
               >
                 View Project <ExternalLink className="ml-2 w-4 h-4" />
@@ -87,6 +93,8 @@ function App() {
               </p>
               <a
                 href="https://github.com/dhvll/fehler_core"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
               >
                 View Project <ExternalLink className="ml-2 w-4 h-4" />
@@ -103,6 +111,8 @@ function App() {
               </p>
               <a
                 href="https://github.com/dhvll/CRM-System"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800"
               >
                 View Project <ExternalLink className="ml-2 w-4 h-4" />
