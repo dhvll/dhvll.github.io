@@ -1,4 +1,3 @@
-import React from "react"
 import { Github, Linkedin, Mail, ExternalLink, Download } from "lucide-react"
 
 function App() {
@@ -213,7 +212,17 @@ function App() {
             <p className="text-gray-500">
               © 2024 Dhaval Chaudhari. All rights reserved.
             </p>
-            <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+            <button
+              className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              onClick={() => {
+                const link = document.createElement("a")
+                link.href = "/resume.pdf" // Ensure the file is inside the public folder
+                link.download = "Dhaval_Resume.pdf" // Set the download filename
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+              }}
+            >
               <Download className="w-4 h-4 mr-2" />
               Download Resume
             </button>
