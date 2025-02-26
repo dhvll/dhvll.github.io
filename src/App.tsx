@@ -42,7 +42,7 @@ function App() {
                 <Linkedin className="w-7 h-7" />
               </a>
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=dhavalchaudhari13@outlook.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=dhaval@dhavalchaudhari.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition duration-200"
@@ -66,17 +66,17 @@ function App() {
           {/* Styled heading */}
           <p className="text-gray-700 leading-relaxed">
             {" "}
-            {/* Improved readability */}
-            As a passionate computer engineer with over a year of hands-on
-            experience, I have developed a strong interest in full-stack web
-            development and am skilled in a wide array of programming languages
-            and technologies. I have practical experience in Python, JavaScript,
-            SQL, Golang, and various frameworks such as Django, ReactJS, Gorilla
-            and Express. My goal is to leverage my diverse skill set to help
-            companies build innovative and impactful products. I am always eager
-            to explore new opportunities and take on new challenges,
-            continuously expanding my knowledge across technologies and
-            development practices.
+            {/* Improved readability */}A computer engineer with more than a
+            year of practical full-stack web development experience. Competent
+            with Django, ReactJS, Gorilla, and Express frameworks and proficient
+            in Python, JavaScript, Golang, and SQL. I specialize in designing
+            and building scalable, secure, and high-performance applications,
+            with a focus on clean, maintainable code and efficient optimization.
+            Working together with cross-functional teams to provide creative
+            software solutions that satisfy user. I’m excited about taking on
+            challenging tasks, and to stay ahead of the always-changing IT
+            business, I like to keep learning new things and adjusting to new
+            technology. Together, let’s create something amazing!
           </p>
         </section>
         {/* Projects Section */}
