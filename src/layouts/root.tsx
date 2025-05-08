@@ -42,12 +42,12 @@ export function RootLayout() {
               >
                 Projects
               </Link>
-              <Link
+              {/* <Link
                 to="/blog"
                 className="transition-colors hover:text-foreground/80"
               >
                 Blog
-              </Link>
+              </Link> */}
               <Link
                 to="/contact"
                 className="transition-colors hover:text-foreground/80"
