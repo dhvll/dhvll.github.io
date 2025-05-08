@@ -44,12 +44,12 @@ const contactRoute = createRoute({
   component: ContactPage,
 })
 
-const routeTree = rootRoute.addChildren({
+const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   projectsRoute,
   blogRoute,
   contactRoute,
-})
+])
 
 export const router = createRouter({ routeTree })
