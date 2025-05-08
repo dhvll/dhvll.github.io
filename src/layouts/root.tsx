@@ -11,7 +11,7 @@ export function RootLayout() {
   }, [])
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "light")
+    document.documentElement.classList.toggle("dark", theme === "dark")
   }, [theme])
 
   const toggleTheme = () => {
@@ -60,7 +60,11 @@ export function RootLayout() {
               className="rounded-md p-2 hover:bg-accent"
               aria-label="Toggle theme"
             >
-              {theme === "light" ? <Moon /> : <Sun />}
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
             </button>
           </nav>
         </div>
