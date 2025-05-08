@@ -3,33 +3,43 @@ import { ExternalLink, Github } from "lucide-react"
 
 const projects = [
   {
-    title: "Project 1",
+    title: "Artify - Design and Editing Platform",
     description:
-      "A brief description of your first project. What problems did it solve? What technologies did you use?",
-    tags: ["React", "TypeScript", "TailwindCSS"],
+      "Developed Artify, a web-based design and editing platform with drag-and-drop functionality, enabling users to create graphics, and social media posts. Integrated features like layer management, text/image editing, and export tools within a fast and user-friendly interface.",
+    tags: ["React", "TypeScript", "Next", "Prisma"],
     links: {
       github: "https://github.com/dhvll/artify",
       // live: "https://project1.com",
     },
   },
   {
-    title: "Project 2",
+    title: "SnippetShare - Code Snippet Manager",
     description:
-      "Description of your second project. Highlight the key features and your role in development.",
-    tags: ["Next.js", "Node.js", "MongoDB"],
+      "This web application provides a secure and efficient platform for managing, storing, and sharing code snippets. Built with Golang, it features user authentication, session management, and role-based access control.",
+    tags: ["Golang", "MySql", "Html"],
     links: {
-      github: "https://github.com/dhvll/project2",
-      live: "https://project2.com",
+      github: "https://github.com/dhvll/snippetshare",
+      // live: "https://project2.com",
     },
   },
   {
-    title: "Project 2",
+    title: "Fehler - Agile Project Management Software",
     description:
-      "Description of your second project. Highlight the key features and your role in development.",
-    tags: ["Next.js", "Node.js", "MongoDB"],
+      "Fehler is a project management software which let teams plan, track and manage software development projects.",
+    tags: ["Python", "Django", "Javascript", "React.js", "Postgresql"],
     links: {
-      github: "https://github.com/dhvll/project2",
-      live: "https://project2.com",
+      github: "https://github.com/dhvll/fehler_core",
+      // live: "https://project2.com",
+    },
+  },
+  {
+    title: "Customer Relationship Management System",
+    description:
+      "This is Customer relationship management system which helps users to manage relationships and interactions with the customer and assign them to agents efficiently.",
+    tags: ["Python", "Django", "Javascript", "React.js", "Postgresql"],
+    links: {
+      github: "https://github.com/dhvll/CRM-System",
+      // live: "https://project2.com",
     },
   },
   // Add more projects as needed
@@ -76,7 +86,8 @@ export function ProjectsPage() {
                 <Github className="h-4 w-4" />
                 GitHub
               </a>
-              <a
+              {/*  TODO */}
+              {/* <a
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +95,7 @@ export function ProjectsPage() {
               >
                 <ExternalLink className="h-4 w-4" />
                 Live Demo
-              </a>
+              </a> */}
             </div>
           </motion.div>
         ))}
