@@ -1,7 +1,7 @@
 export function AboutPage() {
   return (
     <div>
-      <h1> Hi</h1>
+      <h1> about</h1>
     </div>
   )
 }

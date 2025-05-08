@@ -1,7 +1,7 @@
 export function ProjectsPage() {
   return (
     <div>
-      <h1> Hi</h1>
+      <h1> projects</h1>
     </div>
   )
 }

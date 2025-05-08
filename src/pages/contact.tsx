@@ -1,7 +1,7 @@
 export function ContactPage() {
   return (
     <div>
-      <h1> Hi</h1>
+      <h1> contact</h1>
     </div>
   )
 }
