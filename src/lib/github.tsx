@@ -56,7 +56,7 @@ export async function fetchGitHubContributions(
     // Filter and transform relevant events
     const contributions = events
       .filter((event: any) =>
-        ["PullRequestEvent", "IssuesEvent", "CreateEvent"].includes(event.type)
+        ["PullRequestEvent", "IssuesEvent"].includes(event.type)
       )
       .map((event: any) => {
         let type: GitHubContribution["type"] = "Pull Request"
@@ -77,11 +77,6 @@ export async function fetchGitHubContributions(
             type = "Issue"
             description = event.payload.issue.title
             url = event.payload.issue.html_url
-            break
-          case "CreateEvent":
-            type = "Feature"
-            description = `Created ${event.payload.ref_type} ${event.payload.ref}`
-            url = `https://github.com/${event.repo.name}`
             break
         }
 
