@@ -137,29 +137,22 @@ export function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="rounded-lg border bg-card p-4 transition-colors hover:bg-accent/50"
               >
-                <div className="flex items-center justify-between">
-                  <a
-                    href={`https://github.com/${contribution.repo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-medium hover:underline"
-                  >
-                    {contribution.repo}
-                  </a>
-                  <span className="rounded-full bg-secondary px-2 py-1 text-xs">
-                    {contribution.type}
-                  </span>
-                </div>
-                <p className="mt-2 text-muted-foreground">
-                  {contribution.description}
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {new Date(contribution.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
+                <a
+                  href={contribution.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:underline"
+                >
+                  <p className="text-lg font-medium">{contribution.description}</p>
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      {contribution.repo}
+                    </span>
+                    <span className="rounded-full bg-secondary px-2 py-1 text-xs">
+                      {contribution.type}
+                    </span>
+                  </div>
+                </a>
               </motion.div>
             ))
           ) : (
