@@ -1,25 +1,59 @@
 import { motion } from "framer-motion"
-import { Github, RefreshCw } from "lucide-react"
+import { Code2, Database, Cloud, GitPullRequest, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
-import { GitHubContribution, fetchGitHubContributions } from "../lib/github"
-import { Spinner } from "../components/Spinner"
+
+const skills = {
+  "Languages": ["Python", "Golang", "TypeScript", "JavaScript", "Rust", "SQL"],
+  "Backend & Frameworks": ["Django", "FastAPI", "Axum", "Node.js", "Express", "React.js", "Next.js"],
+  "Distributed Systems": ["Docker", "Kubernetes","Redis", "Message Queues", "Microservices", "Kafka", "RabbitMQ"],
+  "Cloud & DevOps": ["AWS", "CI/CD", "Linux", "Git", "PostgreSQL", "MySQL", "MongoDB"],
+  "Testing": ["Unit Tests", "Integration Tests", "E2E Tests", "Mocking", "Testing Frameworks"],
+}
+
+interface PullRequest {
+  title: string
+  repo: string
+  url: string
+  merged_at: string
+  number: number
+}
+
+async function fetchMergedPRs(username: string): Promise<PullRequest[]> {
+  try {
+    const response = await fetch(
+      `https://api.github.com/search/issues?q=author:${username}+type:pr+is:merged&sort=updated&per_page=5`,
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    )
+    
+    if (!response.ok) return []
+    
+    const data = await response.json()
+    return data.items.map((pr: any) => ({
+      title: pr.title,
+      repo: pr.repository_url.split('/').slice(-2).join('/'),
+      url: pr.html_url,
+      merged_at: pr.closed_at,
+      number: pr.number,
+    }))
+  } catch (error) {
+    console.error("Error fetching PRs:", error)
+    return []
+  }
+}
 
 export function AboutPage() {
-  const [contributions, setContributions] = useState<GitHubContribution[]>([])
+  const [mergedPRs, setMergedPRs] = useState<PullRequest[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string>()
-
-  async function loadContributions(skipCache = false) {
-    setLoading(true)
-    setError(undefined)
-    const { data, error } = await fetchGitHubContributions("dhvll", skipCache)
-    setContributions(data)
-    setError(error)
-    setLoading(false)
-  }
 
   useEffect(() => {
-    loadContributions()
+    fetchMergedPRs("dhvll").then((prs) => {
+      setMergedPRs(prs)
+      setLoading(false)
+    })
   }, [])
 
   return (
@@ -27,7 +61,7 @@ export function AboutPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="mx-auto max-w-3xl space-y-12"
+      className="mx-auto max-w-4xl space-y-16"
     >
       {/* Bio Section */}
       <motion.section
@@ -35,20 +69,87 @@ export function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           About Me
         </h1>
-        <div className="mt-6 space-y-6 text-lg text-muted-foreground">
+        <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
           <p>
-            Hello! I'm a passionate developer with a keen interest in building
-            beautiful and functional web applications. I specialize in modern
-            web technologies and love creating intuitive user experiences.
+            I'm a <span className="font-semibold text-foreground">Computer Engineering graduate</span> passionate about 
+            building scalable backend systems and distributed architectures. I specialize in designing and implementing 
+            high-performance APIs, microservices, and cloud-native applications.
           </p>
           <p>
-            With experience in both frontend and backend development, I enjoy
-            working on projects that challenge me to learn new technologies and
-            solve complex problems.
+            My expertise lies in <span className="font-semibold text-foreground">Python, TypeScript, Golang,</span> and 
+            <span className="font-semibold text-foreground"> distributed systems</span> design. I enjoy working on 
+            backend infrastructure, optimizing database queries, and building resilient systems that can handle scale.
           </p>
+          <p>
+            Interested in backend engineering, distributed systems, and infrastructure roles where I can build 
+            robust, scalable solutions and contribute to challenging technical problems.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* Open Source Contributions */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <GitPullRequest className="h-7 w-7 text-foreground" />
+          <h2 className="text-3xl font-bold text-foreground">Open Source Contributions</h2>
+        </div>
+        
+        {loading ? (
+          <div className="text-center py-8 text-muted-foreground">
+            Loading contributions...
+          </div>
+        ) : mergedPRs.length > 0 ? (
+          <div className="space-y-4">
+            {mergedPRs.map((pr) => (
+              <motion.a
+                key={pr.url}
+                href={pr.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="block rounded-lg border bg-card p-5 hover:border-foreground/50 transition-all group"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-foreground group-hover:text-primary transition-colors mb-1">
+                      {pr.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {pr.repo} #{pr.number}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Merged {new Date(pr.merged_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8 text-muted-foreground">
+            No merged pull requests found yet. Check back soon!
+          </div>
+        )}
+        
+        <div className="mt-6 text-center">
+          <a
+            href="https://github.com/dhvll"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            View all contributions on GitHub
+            <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
       </motion.section>
 
@@ -56,121 +157,58 @@ export function AboutPage() {
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: 0.4 }}
       >
-        <h2 className="text-2xl font-semibold text-foreground">Skills</h2>
-        <ul className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            Python
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            TypeScript
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            Golang
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            SQL
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            Nodejs
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            React.js
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            Django
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            AWS
-          </li>
-          <li className="rounded-md bg-secondary px-3 py-1 text-center text-sm">
-            Devops Tools
-          </li>
-        </ul>
+        <div className="flex items-center gap-3 mb-6">
+          <Code2 className="h-7 w-7 text-primary" />
+          <h2 className="text-3xl font-bold text-foreground">Technical Skills</h2>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {Object.entries(skills).map(([category, items], index) => (
+            <motion.div
+              key={category}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + index * 0.1 }}
+              className="rounded-lg border bg-card p-6"
+            >
+              <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+                {category === "Languages" && <Code2 className="h-5 w-5" />}
+                {category === "Backend & Frameworks" && <Database className="h-5 w-5" />}
+                {category === "Distributed Systems" && <Cloud className="h-5 w-5" />}
+                {category === "Cloud & DevOps" && <Cloud className="h-5 w-5" />}
+                {category}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {items.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full bg-secondary px-3 py-1 text-sm font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </motion.section>
 
-      {/* GitHub Contributions Section */}
+      {/* Education Section */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.6 }}
+        className="rounded-lg border bg-card p-6"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Github className="h-6 w-6" />
-            <h2 className="text-2xl font-semibold text-foreground">
-              Open Source Contributions
-            </h2>
-          </div>
-          {!loading && (
-            <button
-              onClick={() => loadContributions(true)}
-              className="inline-flex items-center gap-2 rounded-md p-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              title="Refresh contributions"
-            >
-              <RefreshCw className="h-4 w-4" />
-              <span className="sr-only">Refresh</span>
-            </button>
-          )}
-        </div>
-        <div className="mt-6 space-y-4">
-          {loading ? (
-            <div className="flex items-center justify-center py-8">
-              <Spinner size="lg" className="text-muted-foreground" />
-            </div>
-          ) : error ? (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-center text-sm text-destructive">
-              {error}
-              <button
-                onClick={() => loadContributions(true)}
-                className="ml-2 underline hover:no-underline"
-              >
-                Try again
-              </button>
-            </div>
-          ) : contributions.length > 0 ? (
-            contributions.map((contribution) => (
-              <motion.div
-                key={contribution.url}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="rounded-lg border bg-card p-4 transition-colors hover:bg-accent/50"
-              >
-                <a
-                  href={contribution.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:underline"
-                >
-                  <p className="text-lg font-medium">{contribution.description}</p>
-                  <div className="mt-2 flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
-                      {contribution.repo}
-                    </span>
-                    <span className="rounded-full bg-secondary px-2 py-1 text-xs">
-                      {contribution.type}
-                    </span>
-                  </div>
-                </a>
-              </motion.div>
-            ))
-          ) : (
-            <div className="text-center text-muted-foreground">
-              No contributions found
-            </div>
-          )}
-        </div>
-        <div className="mt-6">
-          <a
-            href="https://github.com/dhvll"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            View more on GitHub
-            <span aria-hidden="true">→</span>
-          </a>
+        <h2 className="text-2xl font-bold text-foreground mb-4">Education</h2>
+        <div>
+          <h3 className="text-lg font-semibold text-foreground">
+            Bachelor of Engineering, Computer Engineering
+          </h3>
+          <p className="text-muted-foreground">
+            Mahatma Gandhi Mission's College of Engineering and Technology
+          </p>
         </div>
       </motion.section>
     </motion.div>

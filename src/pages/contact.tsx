@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, CheckCircle2 } from "lucide-react"
+import { useState, FormEvent } from "react"
 
 const socialLinks = [
   {
@@ -25,6 +26,47 @@ const socialLinks = [
 ]
 
 export function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitError(null)
+
+    const form = e.currentTarget // Store form reference before async operation
+    const formData = new FormData(form)
+    
+    // Add Web3Forms access key - Get your free key from https://web3forms.com
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_WEB3FORMS_ACCESS_KEY"
+    formData.append("access_key", accessKey)
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+      
+      console.log("Web3Forms response:", data) // Debug log
+
+      if (response.ok && data.success) {
+        setSubmitSuccess(true)
+        form.reset() // Use stored form reference
+        setTimeout(() => setSubmitSuccess(false), 5000)
+      } else {
+        setSubmitError(data.message || "Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      console.error("Form submission error:", error) // Debug log
+      setSubmitError("Failed to send message. Please try emailing directly.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -32,14 +74,15 @@ export function ContactPage() {
       transition={{ duration: 0.5 }}
       className="mx-auto max-w-2xl"
     >
-      <h1 className="text-3xl font-bold  tracking-tight sm:text-4xl">
-        Get in Touch
+      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        Let's Work Together
       </h1>
       <p className="mt-4 text-lg text-muted-foreground">
-        I'm always open to new opportunities and collaborations. Feel free to
-        reach out!
+        Available for freelance projects, consulting, and full-time opportunities. 
+        Let's discuss how I can help bring your ideas to life.
       </p>
-      <div className="mt-8 flex items-center justify-center gap-6">
+      
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
         {socialLinks.map(({ name, href, icon: Icon }) => (
           <a
             key={name}
@@ -59,47 +102,97 @@ export function ContactPage() {
       </div>
 
       <div className="mt-12">
-        <form className="space-y-6">
+        {submitSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-lg bg-green-50 dark:bg-green-900/20 p-4 flex items-center gap-2 text-green-800 dark:text-green-200"
+          >
+            <CheckCircle2 className="h-5 w-5" />
+            <p>Message sent successfully! I'll get back to you soon.</p>
+          </motion.div>
+        )}
+
+        {submitError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-lg bg-red-50 dark:bg-red-900/20 p-4 text-red-800 dark:text-red-200"
+          >
+            {submitError}
+          </motion.div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium">
-              Name
+            <label htmlFor="name" className="block text-sm font-medium mb-2">
+              Name *
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              className="mt-1 block w-full rounded-md border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              required
+              className="block w-full rounded-md border bg-background px-4 py-3 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Your name"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium">
-              Email
+            <label htmlFor="email" className="block text-sm font-medium mb-2">
+              Email *
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              className="mt-1 block w-full rounded-md border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              required
+              className="block w-full rounded-md border bg-background px-4 py-3 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="your.email@example.com"
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-sm font-medium">
-              Message
+            <label htmlFor="subject" className="block text-sm font-medium mb-2">
+              Subject
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              className="block w-full rounded-md border bg-background px-4 py-3 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="What's this about?"
+            />
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium mb-2">
+              Message *
             </label>
             <textarea
               id="message"
               name="message"
-              rows={4}
-              className="mt-1 block w-full rounded-md border bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              rows={6}
+              required
+              className="block w-full rounded-md border bg-background px-4 py-3 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder="Tell me about your project..."
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
+            disabled={isSubmitting}
+            className="w-full rounded-md bg-primary px-4 py-3 font-medium text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </button>
         </form>
+        
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Or email me directly at{" "}
+          <a 
+            href="mailto:dhaval@dhavalchaudhari.com" 
+            className="text-primary hover:underline"
+          >
+            dhaval@dhavalchaudhari.com
+          </a>
+        </p>
       </div>
     </motion.div>
   )
