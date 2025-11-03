@@ -3,10 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" sizes="any" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
-    <script type="module" crossorigin src="/assets/index-QcFkLZZm.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Bpv1jfa4.css">
+    <meta name="description" content="Dhaval Chaudhari - Backend & Distributed Systems Engineer. Python, Golang, TypeScript, cloud-native systems." />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>Dhaval Chaudhari - Backend & Distributed Systems</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dhaval Chaudhari - Backend & Distributed Systems" />
+    <meta property="og:description" content="Backend-focused engineer building scalable systems with Python, Golang, TypeScript, and cloud-native architectures." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dhavalchaudhari.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Dhaval Chaudhari - Backend & Distributed Systems" />
+    <meta name="twitter:description" content="Building scalable backend and distributed systems. Python, Golang, TypeScript, Cloud." />
+
+    <!-- GitHub Pages SPA redirect handling -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        sessionStorage.removeItem('redirect');
+        if (redirect && redirect !== location.pathname) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-CBg0xceN.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CaoiazLL.css">
   </head>
   <body>
     <div id="root"></div>
